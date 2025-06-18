@@ -137,15 +137,21 @@ h2 {
 }
 
 .card {
-  background-color: var(--surface-1);
   border-radius: 1rem;
+  position: relative;
+  background: hsl(from var(--surface-1) h s l / 0.2);
+  backdrop-filter: blur(10px);
+}
 
-  border: 1px solid transparent;
-  background: radial-gradient(
-        circle at 50% 250%,
-        var(--primary-500),
-        var(--primary-600)
-      )
-      padding-box,
-    linear-gradient(var(--border-1), var(--border-2)) border-box;
+.card::before {
+  content: "";
+  position: absolute;
+  background: black;
+  border-radius: inherit;
+  z-index: -1;
+  inset: 0;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--border-1), var(--border-2)) border-box;
+  mask: linear-gradient(black) border-box, linear-gradient(black) padding-box;
+  mask-composite: subtract;
 }
